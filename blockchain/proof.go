@@ -10,6 +10,7 @@ package blockchain
 import (
 	"bytes"
 	"crypto/sha256"
+	"fmt"
 	"math"
 	"math/big"
 )
@@ -49,18 +50,20 @@ func (p *ProofOfWork) Run() (int, []byte) {
 
 	// create a loop of how many times it is from 0 to maxInt64
 	nonce := 0
-	for nonce = 0; nonce < math.MaxInt64; nonce++ {
+	for nonce  < math.MaxInt64 {
 		data := p.InitNonce(nonce)
 		hash := sha256.Sum256(data)
 
-		//fmt.Printf("\r [%d] %x", nonce, hash)
+		fmt.Printf("\r [%d] %x", nonce, hash)
 		intHash.SetBytes(hash[:])
 
 		if intHash.Cmp(p.Target) == -1 {
 			break
+		} else {
+			nonce++
 		}
 	}
-	//fmt.Println()
+	fmt.Println()
 	return nonce, hash[:]
 }
 
