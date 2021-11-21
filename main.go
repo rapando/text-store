@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/rapando/text-store/blockchain"
+	"math"
 	"strconv"
 	"time"
 )
@@ -10,7 +11,7 @@ import (
 func main() {
 	start := time.Now()
 	defer func() {
-		fmt.Printf("--------- took %v\n", time.Since(start))
+		fmt.Printf("---------[%v] took %v\n", math.MaxInt64, time.Since(start))
 	}()
 
 	chain := blockchain.InitBlockChain()
@@ -31,3 +32,5 @@ func main() {
 		fmt.Println()
 	}
 }
+
+9,223,372,036,854,775,807
